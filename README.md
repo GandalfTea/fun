@@ -1,2 +1,2 @@
-# learning_projects
+# Learning Projects
 Dump of random projects made to learn.
