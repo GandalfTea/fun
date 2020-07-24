@@ -2,6 +2,7 @@
 PROJECT: BANK MANAGEMENT SOFTWARE
 BY: Rusu Octavian
 DATE: 07.2020
+FILE: Class Definition
 **************************************/
 
 
@@ -14,7 +15,7 @@ using namespace std;
 class BankAccount {
 private:
 
-    string AccountNumber{}; //Should I initialize?
+    string AccountNumber{};
     double Balance{};
     string FirstName;
     string LastName;
