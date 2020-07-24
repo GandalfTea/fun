@@ -2,9 +2,9 @@
 PROJECT: BANK MANAGEMENT SOFTWARE
 BY: Rusu Octavian
 DATE: 07.2020
-FILE: Implementation.cpp
+FILE: Implementation
+QUALITY: Shit
 **************************************/
-
 
 #include "BankManagement.h"
 #include <iostream>
@@ -17,8 +17,10 @@ using namespace std;
 void NewAccount();
 void ClearScreen();
 void DisplayMenu();
-void DisplayAccount(BankAccount user);
-void AccountName(BankAccount user);
+void Withdraw();
+void Deposit();
+void DisplayBalance();
+void DisplayAccountInfo(BankAccount user);
 void DisplayAccountSelection();
 void InstanceSetUp(string FirstName, string LastName, string AccNumber, char AccountType, double InitialDeposit); //For NewAccount.
 string random_string( size_t length );
@@ -42,110 +44,44 @@ vector< string > allNames{};
 
 
 int main(){
-
-    //INPUT VARIABLES
     int selection{};
-    int selection2{};
-    int MoneyTransaction{};
-
     do
     {
-        //Bank Intro
+        //TODO: Bank Intro
+        ClearScreen();
         DisplayMenu();
-
         cin >> selection;
-
         switch(selection){
 
             case 1:
                 NewAccount();
                 break;
-
             case 2:
-                //DEPOSIT AMOUNT
+                Deposit();
                 break;
-       
             case 3:
-                //Withdraw
-                DisplayAccountSelection();
-
-                cin >> selection2;
-
-                switch (selection2)
-                {
-                case 1:
-
-                    DisplayAccount(user1);
-
-                    cout << "\n\n How much would you like to withdraw?\n:";
-                    cin >> MoneyTransaction;
-
-                    if(user1.getBalance() >= MoneyTransaction){
-                        user1.withdrawBalance(MoneyTransaction);
-                    }else{
-                        cout << "You cannot withdraw more than your current balance.";
-                    }
-
-                    break;
-                case 2:
-                    DisplayAccount(user2);
-                case 3:
-                    DisplayAccount(user3);
-                case 4:
-                    DisplayAccount(user4);
-                case 5:
-                    DisplayAccount(user5);
-                default:
-                    break;
-                }
-
+                Withdraw();
                 break;
-
             case 4:
-                //Balance Inquiry
-                DisplayAccountSelection();
-
-                cin >> selection2;
-
-                switch (selection2)
-                {
-                case 1:
-                    DisplayAccount(user1);
-                    break;
-                case 2:
-                    DisplayAccount(user2);
-                case 3:
-                    DisplayAccount(user3);
-                case 4:
-                    DisplayAccount(user4);
-                case 5:
-                    DisplayAccount(user5);
-                default:
-                    break;
-                }
-
+                //balance
+                DisplayBalance();
                 break;
-
             case 5:
+                //Display accounts
                 DisplayAccountSelection();
+                _sleep(3000);
                 break;
-
             case 6:
                 //Close an account
                 break;
-
             case 7:
                 //modify an account
                 break;
-                
             default:
                 cout << "no way Hose.";
                 break;
         }
-
-
     } while (selection != 8);
-
     return 0;
 }
 
@@ -199,7 +135,8 @@ void NewAccount(){
     allNames.push_back(FullName);
 
     //GENERATE ALPHA-NUMERIC RANDOM ACCOUNT NUMBER.
-    AccNumber = "RO0" + to_string(temp) + random_string(15);
+    AccNumber = "RO0" + to_string(temp);
+    // + random_string(15);
 
     //ASK FOR TYPE OF ACCOUNT
     ClearScreen();
@@ -237,6 +174,212 @@ void NewAccount(){
 
 }
 
+void Withdraw(){
+
+    int selection2{};
+    int MoneyTransaction{};
+    DisplayAccountSelection();
+    cin >> selection2;
+
+    switch (selection2)
+     {
+        case 1:
+            ClearScreen();
+            DisplayAccountInfo(user1);
+            cout << "\n\n How much would you like to withdraw?\n:";
+            cin >> MoneyTransaction;
+            if(user1.getBalance() >= MoneyTransaction){
+                user1.withdrawBalance(MoneyTransaction);
+                cout << "\nWithdraw complete.";
+                cout <<"\nNew balance: $" << user1.getBalance();
+                _sleep(2000);
+            }else{
+                ClearScreen();
+                cout << "You cannot withdraw more than your current balance.";
+                _sleep(2000);
+            }
+            break;
+        case 2:
+            ClearScreen();
+            DisplayAccountInfo(user2);
+            cout << "\n\n How much would you like to withdraw?\n:";
+            cin >> MoneyTransaction;
+            if(user2.getBalance() >= MoneyTransaction){
+                user2.withdrawBalance(MoneyTransaction);
+                cout << "\nWithdraw complete.";
+                cout <<"\nNew balance: $" << user2.getBalance();
+                _sleep(2000);
+            }else{
+                ClearScreen();
+                cout << "You cannot withdraw more than your current balance.";
+                _sleep(2000);
+             }
+            break;
+        case 3:
+            ClearScreen();
+            DisplayAccountInfo(user3);
+            cout << "\n\n How much would you like to withdraw?\n:";
+            cin >> MoneyTransaction;
+            if(user3.getBalance() >= MoneyTransaction){
+                user3.withdrawBalance(MoneyTransaction);
+                cout << "\nWithdraw complete.";
+                cout <<"\nNew balance: $" << user3.getBalance();
+                _sleep(2000);
+            }else{
+                ClearScreen();
+                cout << "You cannot withdraw more than your current balance.";
+                _sleep(2000);
+            }
+            break;
+        case 4:
+            ClearScreen();
+            DisplayAccountInfo(user4);
+            cout << "\n\n How much would you like to withdraw?\n:";
+            cin >> MoneyTransaction;
+            if(user4.getBalance() >= MoneyTransaction){
+                user4.withdrawBalance(MoneyTransaction);
+                cout << "\nWithdraw complete.";
+                cout <<"\nNew balance: $" << user4.getBalance();
+                _sleep(2000);
+            }else{
+                ClearScreen();
+                cout << "You cannot withdraw more than your current balance.";
+                _sleep(2000);
+            }
+            break;
+        case 5:
+            ClearScreen();
+            DisplayAccountInfo(user5);
+            cout << "\n\n How much would you like to withdraw?\n:";
+            cin >> MoneyTransaction;
+            if(user5.getBalance() >= MoneyTransaction){
+                user5.withdrawBalance(MoneyTransaction);
+                cout << "\nWithdraw complete.";
+                cout <<"\nNew balance: $" << user5.getBalance();
+                _sleep(2000);
+            }else{
+                ClearScreen();
+                cout << "You cannot withdraw more than your current balance.";
+                _sleep(2000);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Deposit(){
+    int selection2{};
+    int MoneyTransaction{};
+    DisplayAccountSelection();
+    cin >> selection2;
+
+    //BUG: CAN WITHDRAW EVEN IF NOT INITIALIZED
+    switch (selection2){
+        case 1:
+            if(user1.getInitialization() == true){
+                ClearScreen();
+                DisplayAccountInfo(user1);
+                cout << "\n\n How much would you like to deposit?\n:";
+                cin >> MoneyTransaction;
+                user1.depositBalance(MoneyTransaction);
+                cout << "\nDeposit complete.";
+                cout <<"\nNew balance: $" << user1.getBalance();
+                _sleep(2000);
+                break;
+            }else{
+                break;
+            }
+        case 2:
+            if(user2.getInitialization() == true){
+                ClearScreen();
+                DisplayAccountInfo(user1);
+                cout << "\n\n How much would you like to deposit?\n:";
+                cin >> MoneyTransaction;
+                user2.depositBalance(MoneyTransaction);
+                cout << "\nDeposit complete.";
+                cout <<"\nNew balance: $" << user2.getBalance();
+                _sleep(2000);
+                break;
+            }else{
+                break;
+            }
+        case 3:
+            if(user3.getInitialization() == true){
+                ClearScreen();
+                DisplayAccountInfo(user1);
+                cout << "\n\n How much would you like to deposit?\n:";
+                cin >> MoneyTransaction;
+                user3.depositBalance(MoneyTransaction);
+                cout << "\nDeposit complete.";
+                cout <<"\nNew balance: $" << user3.getBalance();
+                _sleep(2000);
+                break;
+            }else{
+                break;
+            }
+        case 4:
+            if(user4.getInitialization() == true){
+                ClearScreen();
+                DisplayAccountInfo(user1);
+                cout << "\n\n How much would you like to deposit?\n:";
+                cin >> MoneyTransaction;
+                user4.depositBalance(MoneyTransaction);
+                cout << "\nDeposit complete.";
+                cout <<"\nNew balance: $" << user4.getBalance();
+                _sleep(2000);
+                break;
+            }else{
+                break;
+            }
+        case 5:
+            if(user5.getInitialization() == true){
+                ClearScreen();
+                DisplayAccountInfo(user1);
+                cout << "\n\n How much would you like to deposit?\n:";
+                cin >> MoneyTransaction;
+                user5.depositBalance(MoneyTransaction);
+                cout << "\nDeposit complete.";
+                cout <<"\nNew balance: $" << user5.getBalance();
+                _sleep(2000);
+                break;
+            }else{
+                break;
+            }
+        default:
+            break;
+    }
+
+}
+//not working
+void DisplayBalance(){
+
+    int selection2{};
+
+    DisplayAccountSelection();
+    switch (selection2)
+    {
+    case 1:
+        DisplayAccountInfo(user1);
+        break;
+    case 2: 
+        DisplayAccountInfo(user2);
+        break;
+    case 3:
+        DisplayAccountInfo(user3);
+        break;
+    case 4:
+        DisplayAccountInfo(user4);
+        break;
+    case 5:
+        DisplayAccountInfo(user5);
+        break;
+    default:
+        break;
+    }
+
+}
+
 void InstanceSetUp(string FName, string LName, string ANumber, char AccType, double IDeposit){
 
     //Shit, but it doesn't works.
@@ -254,8 +397,7 @@ void InstanceSetUp(string FName, string LName, string ANumber, char AccType, dou
         cout << "\n\nAccount name: " << user1.getFullName();
         cout << "\nAccount number: " << user1.getAccountNumber();
         cout << "\nAccount type: " << user1.getType();
-        cout << "\nInitial deposit: " << user1.getBalance();
-        cout << "\n\nPlease verify your details.";
+        cout << "\nInitial deposit: $" << user1.getBalance();
         _sleep(5000);
 
     }else if(temp == 2){
@@ -272,8 +414,7 @@ void InstanceSetUp(string FName, string LName, string ANumber, char AccType, dou
         cout << "\n\nAccount name: " << user2.getFullName();
         cout << "\nAccount number: " << user2.getAccountNumber();
         cout << "\nAccount type: " << user2.getType();
-        cout << "\nInitial deposit: " << user2.getBalance();
-        cout << "\n\nPlease verify your details.";
+        cout << "\nInitial deposit: $" << user2.getBalance();
         _sleep(5000);
 
     }else if(temp == 3){
@@ -290,8 +431,7 @@ void InstanceSetUp(string FName, string LName, string ANumber, char AccType, dou
         cout << "\n\nAccount name: " << user3.getFullName();
         cout << "\nAccount number: " << user3.getAccountNumber();
         cout << "\nAccount type: " << user3.getType();
-        cout << "\nInitial deposit: " << user3.getBalance();
-        cout << "\n\nPlease verify your details.";
+        cout << "\nInitial deposit: $" << user3.getBalance();
         _sleep(5000);
 
     }else if(temp == 4){
@@ -308,8 +448,7 @@ void InstanceSetUp(string FName, string LName, string ANumber, char AccType, dou
         cout << "\n\nAccount name: " << user4.getFullName();
         cout << "\nAccount number: " << user4.getAccountNumber();
         cout << "\nAccount type: " << user4.getType();
-        cout << "\nInitial deposit: " << user4.getBalance();
-        cout << "\n\nPlease verify your details.";
+        cout << "\nInitial deposit: $" << user4.getBalance();
         _sleep(5000);
 
     }else if(temp == 5){
@@ -326,20 +465,18 @@ void InstanceSetUp(string FName, string LName, string ANumber, char AccType, dou
         cout << "\n\nAccount name: " << user5.getFullName();
         cout << "\nAccount number: " << user5.getAccountNumber();
         cout << "\nAccount type: " << user5.getType();
-        cout << "\nInitial deposit: " << user5.getBalance();
-        cout << "\n\nPlease verify your details.";
+        cout << "\nInitial deposit: $" << user5.getBalance();
         _sleep(5000);
     }
 }
 
-void DisplayAccount(BankAccount user){
+void DisplayAccountInfo(BankAccount user){
 //Display one account details
     if(user.getInitialization() == true){
         cout << "\n NAME: " << user.getFullName();
         cout << "\n ACCOUNT NUMBER: " << user.getAccountNumber();
         cout << "\n ACCOUNT TYPE: " << user.getType();
         cout << "\n BALANCE: " << user.getBalance() << "\n\n";
-        _sleep(5000);
     }else{
         return;
     }
@@ -348,38 +485,28 @@ void DisplayAccount(BankAccount user){
 void DisplayAccountSelection(){
 //Display all accounts for selection, if initialized
     ClearScreen();
-    cout << "Please select an account: ";
     if(user1.getInitialization() == true){
         cout << "\n1. ";
-        AccountName(user1);
+        cout << "ACCOUNT NAME: " << user1.getFullName() << "\n";
     }
     if(user2.getInitialization() == true){
         cout << "\n2. ";
-        AccountName(user2);
+        cout << "ACCOUNT NAME: " << user2.getFullName() << "\n";
     }
     if(user3.getInitialization() == true){
         cout << "\n3. ";
-        AccountName(user3);
+        cout << "ACCOUNT NAME: " << user3.getFullName() << "\n";
     }
     if(user4.getInitialization() == true){
         cout << "\n4. ";
-        AccountName(user4);
+        cout << "ACCOUNT NAME: " << user4.getFullName() << "\n";
     }
     if(user5.getInitialization() == true){
         cout << "\n5. ";
-        AccountName(user5);
+        cout << "ACCOUNT NAME: " << user5.getFullName() << "\n";
     }
+    cout << "Please select an account: ";
 }
-
-void AccountName(BankAccount user){
-//Display only the account name, if the user is initialized
-    if(user.getInitialization() == true){
-        cout << "ACCOUNT NAME: " << user.getFullName() << "\n\n";
-    }else{
-        return;
-    }
-}
-
 
 void DisplayMenu(){
 
@@ -402,4 +529,6 @@ void ClearScreen(){
 
 //GENERATE RANDOM ALPHA-NUMERIC ACCOUNT NUMBER
 //From the InterWeb, haha
-string random_string( size_t length )
+// string random_string( size_t length ){
+
+// }
