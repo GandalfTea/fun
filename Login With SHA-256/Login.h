@@ -6,8 +6,6 @@
 
 #pragma once
 
-//DEBUG
-#include<iostream>
 #include "SHA_256.h"
 #include <string>
 #include <vector>
