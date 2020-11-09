@@ -42,8 +42,6 @@ class UserLogin {
 		std::string Encrypt(const std::string toEncrypt){
 			
 			string hash = SHA_256.Encrypt(toEncrypt);
-			std::cout << "\n To Encrypt : " << toEncrypt;
-			std::cout << "\n\n hash : " << hash;
 
 			return hash;
 		}
