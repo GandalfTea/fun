@@ -1,5 +1,4 @@
 from Passports import passports
-from example_invalid import passports_ex
 
 passports = passports.split("\n\n")
 
